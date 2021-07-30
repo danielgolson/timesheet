@@ -18,3 +18,21 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+import { render, screen } from '@testing-library/react';
+import App from '../App';
+
+const TEST_ID = '_app';
+
+test('App renders without errors', () => {
+  render(<App />);
+
+  const result = screen.getAllByTestId(TEST_ID);
+  expect(result).toHaveLength(1);
+});
+
+test('App has class', () => {
+  render(<App />);
+  const result = screen.getAllByTestId(TEST_ID);
+  expect(result[0]).toHaveClass('app');
+});
