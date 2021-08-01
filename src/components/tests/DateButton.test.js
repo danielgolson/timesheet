@@ -19,26 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import React, { useState } from 'react'
-import DateList from './DateList'
+import { render, screen, fireEvent } from '@testing-library/react';
+import DateButton from '../DateButton';
 
-function App() {
-  let [selectedDate, setSelectedDate] = useState();
+const TEST_ID = '_dateButton';
 
-  const dateSelectedCallback = (date) => {
-    console.log(date);
-    setSelectedDate(date);
-  }
+test('DateButton renders without errors', () => {
+    render(<DateButton />);
 
-  return (
-    <div
-      data-testid="_app"
-      className="app"
-    >
-      <DateList startDate={new Date('July 1, 2001')} endDate={new Date('July 3, 2001')} onDateSelected={dateSelectedCallback} />
-      {selectedDate.toDateString()}
-    </div>
-  );
-}
+    const result = screen.getAllByTestId(TEST_ID);
+    expect(result).toHaveLength(1);
+});
 
-export default App;
+test('DateButton has class', () => {
+    render(<DateButton />);
+    const result = screen.getAllByTestId(TEST_ID);
+    expect(result[0]).toHaveClass('dateButton');
+});
+
+test('DateButton displays the set date', () => {
+    let date = new Date('July 1, 2001 00:00:00'); // Sunday
+    render(<DateButton date={date} />);
+    const result = screen.getAllByTestId(TEST_ID);
+    expect(result[0].textContent).toMatch('Sun 6/01');
+});
+
+test('DateButton fires onDateSelected event', () => {
+    let date = new Date('July 1, 2001 00:00:00'); // 
+    const handleClick = jest.fn();
+
+    render(<DateButton date={date} onDateSelected={handleClick} />);
+    const result = screen.getAllByTestId(TEST_ID);
+    fireEvent.click(result[0]);
+    expect(handleClick).toBeCalledWith(date);
+});

@@ -19,26 +19,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import React, { useState } from 'react'
-import DateList from './DateList'
+import React from 'react'
+import DateButton from './DateButton';
 
-function App() {
-  let [selectedDate, setSelectedDate] = useState();
+const DateList = (props) => {
+    // Generate the list of date buttons
+    let dateList = [];
+    if (props.startDate && props.endDate) {
+        let start = new Date(props.startDate.toDateString());
+        let end = new Date(props.endDate.toDateString());
+        const millisecondsInDay = 86400000; // milliseconds in a day = 24 * 60 * 60 * 1000
+        for (let i = start.getTime(); i <= end.getTime(); i += millisecondsInDay) {
+            dateList.push(i);
+        }
+    }
 
-  const dateSelectedCallback = (date) => {
-    console.log(date);
-    setSelectedDate(date);
-  }
+    const onClick = (date) => {
+        console.log(date);
+        if (props.onDateSelected) {
+            props.onDateSelected(date);
+        }
+    }
 
-  return (
-    <div
-      data-testid="_app"
-      className="app"
-    >
-      <DateList startDate={new Date('July 1, 2001')} endDate={new Date('July 3, 2001')} onDateSelected={dateSelectedCallback} />
-      {selectedDate.toDateString()}
-    </div>
-  );
+    return (
+        <div
+            data-testid="_dateList"
+            className="dateList"
+        >
+            {dateList.map((time) => <DateButton key={time} date={new Date(time)} onDateSelected={onClick} />)}
+        </div>
+    );
 }
 
-export default App;
+export default DateList;

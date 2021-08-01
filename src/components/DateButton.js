@@ -19,26 +19,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import React, { useState } from 'react'
-import DateList from './DateList'
+import React from 'react'
 
-function App() {
-  let [selectedDate, setSelectedDate] = useState();
+const DateButton = (props) => {
+    let text = '-----';
+    if (props.date) {
+        let dayOfWeek = props.date.toLocaleString('en-US', { weekday: 'short' });
+        let datePad = props.date.getDate() < 10 ? '0' : '';
+        text = `${dayOfWeek} ${props.date.getMonth()}/${datePad}${props.date.getDate()}`;
+    }
 
-  const dateSelectedCallback = (date) => {
-    console.log(date);
-    setSelectedDate(date);
-  }
-
-  return (
-    <div
-      data-testid="_app"
-      className="app"
-    >
-      <DateList startDate={new Date('July 1, 2001')} endDate={new Date('July 3, 2001')} onDateSelected={dateSelectedCallback} />
-      {selectedDate.toDateString()}
-    </div>
-  );
+    return (
+        <button
+            data-testid="_dateButton"
+            className="dateButton"
+            onClick={() => { props.onDateSelected && props.onDateSelected(props.date) }}
+        >
+            {text}
+        </button>
+    );
 }
 
-export default App;
+export default DateButton;
