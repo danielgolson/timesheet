@@ -19,7 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import DateButton from "../DateButton";
 
 const TEST_ID = "_dateButton";
@@ -50,6 +51,6 @@ test("DateButton fires onDateSelected event", () => {
 
   render(<DateButton date={date} onDateSelected={handleClick} />);
   const result = screen.getByTestId(TEST_ID);
-  fireEvent.click(result);
+  userEvent.click(result);
   expect(handleClick).toBeCalledWith(date);
 });

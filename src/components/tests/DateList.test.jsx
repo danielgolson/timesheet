@@ -19,7 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import DateList from "../DateList";
 
 const TEST_ID = "_dateList";
@@ -59,7 +60,7 @@ test("DateList returns expected date when list item is clicked", () => {
     />
   );
   const result = screen.getAllByRole("button");
-  fireEvent.click(result[0]);
-  fireEvent.click(result[4]);
+  userEvent.click(result[0]);
+  userEvent.click(result[4]);
   expect(handleClick).toBeCalledTimes(2);
 });
