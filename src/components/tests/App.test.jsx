@@ -1,17 +1,17 @@
 /**
  * MIT License
- * 
+ *
  * Copyright (c) 2021 Daniel G. Olson
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
  * and associated documentation files (the "Software"), to deal in the Software without
  * restriction, including without limitation the rights to use, copy, modify, merge, publish,
  * distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all copies or
  * substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
  * BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
@@ -19,20 +19,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { render, screen } from '@testing-library/react';
-import App from '../App';
+import { render, screen } from "@testing-library/react";
+import App from "../App";
 
-const TEST_ID = '_app';
+const TEST_ID = "_app";
 
-test('App renders without errors', () => {
+test("App renders without errors", () => {
   render(<App />);
 
-  const result = screen.getAllByTestId(TEST_ID);
-  expect(result).toHaveLength(1);
+  const result = screen.getByTestId(TEST_ID);
+  expect(result).toBeInTheDocument();
 });
 
-test('App has class', () => {
+test("App has class", () => {
   render(<App />);
-  const result = screen.getAllByTestId(TEST_ID);
-  expect(result[0]).toHaveClass('app');
+  const result = screen.getByTestId(TEST_ID);
+  expect(result).toHaveClass("app");
 });
