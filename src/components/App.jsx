@@ -36,7 +36,7 @@ function App() {
       className="app"
     >
       <DateList startDate={new Date('July 1, 2001')} endDate={new Date('July 3, 2001')} onDateSelected={dateSelectedCallback} />
-      {selectedDate.toDateString()}
+      {selectedDate && selectedDate.toDateString()}
     </div>
   );
 }
