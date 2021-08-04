@@ -32,8 +32,8 @@ function App() {
   return (
     <div data-testid="_app" className="app">
       <DateList
-        startDate={new Date("July 1, 2001")}
-        endDate={new Date("July 14, 2001")}
+        startDate={new Date("August 1, 2021")}
+        endDate={new Date("August 14, 2021")}
         onDateSelected={dateSelectedCallback}
       />
       {selectedDate && selectedDate.toDateString()}

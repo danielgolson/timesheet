@@ -64,3 +64,16 @@ test("DateList returns expected date when list item is clicked", () => {
   userEvent.click(result[4]);
   expect(handleClick).toBeCalledTimes(2);
 });
+
+test("DateList contains button with 'today'", () => {
+  let today = new Date(new Date().toDateString());
+  const millisecondsInDay = 86400000; // milliseconds in a day = 24 * 60 * 60 * 1000
+  let startDate = new Date(today.getTime() - millisecondsInDay * 3); // 3 days ago
+  let endDate = new Date(today.getTime() + millisecondsInDay * 3); // 3 days from now
+
+  render(<DateList startDate={startDate} endDate={endDate} />);
+  const result = screen.getAllByRole("button");
+  expect(result).toHaveLength(7);
+
+  expect(result[3]).toHaveTextContent(/today/i);
+});

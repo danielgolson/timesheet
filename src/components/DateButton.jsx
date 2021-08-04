@@ -24,9 +24,14 @@ import React from "react";
 const DateButton = (props) => {
   let text = "-----";
   if (props.date) {
+    let isToday = new Date().toDateString() === props.date.toDateString();
     let dayOfWeek = props.date.toLocaleString("en-US", { weekday: "short" });
+    let month = props.date.getMonth() + 1;
     let datePad = props.date.getDate() < 10 ? "0" : "";
-    text = `${dayOfWeek} ${props.date.getMonth()}/${datePad}${props.date.getDate()}`;
+    text = `${dayOfWeek} ${month}/${datePad}${props.date.getDate()}`;
+    if (isToday) {
+      text += " Today";
+    }
   }
 
   return (

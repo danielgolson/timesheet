@@ -42,7 +42,7 @@ test("DateButton displays the set date", () => {
   let date = new Date("July 1, 2001 00:00:00"); // Sunday
   render(<DateButton date={date} />);
   const result = screen.getByTestId(TEST_ID);
-  expect(result).toHaveTextContent("Sun 6/01");
+  expect(result).toHaveTextContent(/7\/01/);
 });
 
 test("DateButton fires onDateSelected event", () => {
