@@ -1,0 +1,17 @@
+.app {
+  display: flex;
+  background-color: burlywood;
+}
+
+.dateList {
+  display: grid;
+  flex-direction: column;
+  background-color: aliceblue;
+  row-gap: 3px;
+}
+
+.dateButton {
+  background-color: aqua;
+  width: 100px;
+  height: 35px;
+}

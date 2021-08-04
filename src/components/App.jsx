@@ -26,7 +26,6 @@ function App() {
   let [selectedDate, setSelectedDate] = useState();
 
   const dateSelectedCallback = (date) => {
-    console.log(date);
     setSelectedDate(date);
   };
 
@@ -34,7 +33,7 @@ function App() {
     <div data-testid="_app" className="app">
       <DateList
         startDate={new Date("July 1, 2001")}
-        endDate={new Date("July 3, 2001")}
+        endDate={new Date("July 14, 2001")}
         onDateSelected={dateSelectedCallback}
       />
       {selectedDate && selectedDate.toDateString()}

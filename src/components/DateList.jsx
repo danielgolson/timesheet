@@ -26,16 +26,15 @@ const DateList = (props) => {
   // Generate the list of date buttons
   let dateList = [];
   if (props.startDate && props.endDate) {
-    let start = new Date(props.startDate.toDateString());
-    let end = new Date(props.endDate.toDateString());
+    let start = new Date(props.startDate.toDateString()).getTime();
+    let end = new Date(props.endDate.toDateString()).getTime();
     const millisecondsInDay = 86400000; // milliseconds in a day = 24 * 60 * 60 * 1000
-    for (let i = start.getTime(); i <= end.getTime(); i += millisecondsInDay) {
+    for (let i = start; i <= end; i += millisecondsInDay) {
       dateList.push(i);
     }
   }
 
   const onClick = (date) => {
-    console.log(date);
     if (props.onDateSelected) {
       props.onDateSelected(date);
     }
